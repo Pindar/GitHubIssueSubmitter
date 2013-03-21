@@ -8,15 +8,14 @@ import static groovyx.net.http.ContentType.JSON
 class GitHubIssueController {
 
 	String ISSUE_PATH = '/repos/Pindar/GitHubIssueSubmitter/issues'
+	HTTPBuilder githubApi
 	
     def index() { }
 
 	def createIssue(String title, String message, String username, String password) {
 		
 		def issue = new Issue(title: title, body: message);
-		
 		def authHeaderValue = "Basic " + (username + ":" + password).encodeAsBase64()
-		def githubApi = new HTTPBuilder( 'https://api.github.com' )
 		
 		githubApi.request(Method.POST) {
 			headers.'Authorization' = authHeaderValue
