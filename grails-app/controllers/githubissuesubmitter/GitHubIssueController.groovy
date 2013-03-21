@@ -13,9 +13,9 @@ class GitHubIssueController {
 
 	def createIssue(String title, String message, String username, String password) {
 		
-		def authHeaderValue = "Basic " + (username + ":" + password).encodeAsBase64()
 		def issue = new Issue(title: title, body: message);
 		
+		def authHeaderValue = "Basic " + (username + ":" + password).encodeAsBase64()
 		def githubApi = new HTTPBuilder( 'https://api.github.com' )
 		
 		githubApi.request(Method.POST) {
